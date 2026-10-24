@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LKM 5 – Zat dan Perubahannya</title>
+<style>
+:root{--p:#b45309;--pd:#7c2d12;--pl:#fef3c7;--ink:#2a2622;--ln:#dccdb0;--g:#2f855a}
+*{box-sizing:border-box}
+html{overflow-x:hidden}
+body{margin:0;background:#fbf6ec;color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;overflow-wrap:anywhere}
+.wrap{max-width:900px;margin:0 auto;padding:14px}
+.hero{background:linear-gradient(135deg,var(--pd),var(--p));color:#fff;border-radius:14px;padding:18px 16px 24px;position:relative;overflow:hidden;text-align:center}
+.hero:after{content:"";position:absolute;left:0;right:0;bottom:0;height:8px;background:repeating-linear-gradient(45deg,#fbbf24 0 12px,#1f1a14 12px 24px)}
+.hero h1{margin:0 0 4px;font-size:1.4rem}.hero p{margin:2px 0}
+.prog{position:sticky;top:0;z-index:20;display:flex;gap:12px;align-items:center;background:#fff;border:1px solid var(--ln);border-radius:14px;padding:8px 12px;margin:12px 0;box-shadow:0 2px 8px #0002}
+.prog svg{flex:none;width:64px;height:64px}.pi{flex:1;min-width:0}.pi b{font-size:1.1rem}
+.bar{height:12px;background:#eee3cc;border-radius:9px;overflow:hidden;margin:5px 0 3px}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#f59e0b,var(--g));transition:width .4s}
+.small{font-size:.85rem;color:#6b6258}
+.tools{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+button{font:inherit;cursor:pointer;border:0;border-radius:10px;padding:10px 14px;font-weight:600;background:var(--p);color:#fff}
+button.s{background:#fff;color:var(--pd);border:1.5px solid var(--p)}
+button.d{background:#fff;color:#b91c1c;border:1.5px solid #e9a3a3;padding:6px 10px}
+button.r{background:#b91c1c}button:disabled{opacity:.4;cursor:default}
+.card{background:#fff;border:1px solid var(--ln);border-radius:14px;padding:14px;margin:0 0 14px}
+.card h2{margin:-14px -14px 12px;padding:10px 14px;background:var(--pl);border-radius:14px 14px 0 0;border-bottom:3px solid #f59e0b;font-size:1.05rem;color:var(--pd)}
+.pet{background:#ecfdf5;border-left:4px solid var(--g);padding:8px 12px;border-radius:8px;margin:0 0 12px;font-size:.95rem}
+.case{background:#fff7ed;border-left:5px solid #ea580c;padding:10px 14px;border-radius:8px;margin:6px 0 12px}
+h3{margin:14px 0 6px;font-size:1rem;color:var(--pd)}p{margin:6px 0}
+.qa{margin:0 0 12px}.qt{margin-bottom:5px;font-weight:600}.qt i,.qt em{font-weight:400}
+.ans{display:block;width:100%;min-height:3.4em;height:auto;padding:9px 11px;border:1.5px solid var(--ln);border-radius:9px;background:#fffdf8;white-space:pre-wrap;overflow-wrap:anywhere;outline:0}
+.ans.one{min-height:0}td .ans{min-height:2.8em}td .ans.one{min-height:0}
+.ans:focus{border-color:var(--p);box-shadow:0 0 0 3px #f59e0b44}
+.ans:empty:before{content:attr(data-ph);color:#a39a8c}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 12px}
+.arow{display:flex;gap:8px;align-items:center;margin:6px 0}.lab{font-weight:600;flex:none;width:92px}.arow .ans{flex:1}
+table{width:100%;border-collapse:collapse;table-layout:fixed;margin:6px 0 10px}
+th{background:var(--pl);text-align:left;font-size:.88rem;padding:7px;border:1px solid var(--ln)}
+td{padding:6px;border:1px solid var(--ln);vertical-align:top}.nm{font-weight:700}
+.hint{font-size:.92rem;color:#5a5147}
+.chk label{display:flex;gap:10px;align-items:center;padding:5px 0}
+.chk input{width:22px;height:22px;accent-color:var(--p);flex:none}
+.modal{position:fixed;inset:0;background:#0007;display:flex;align-items:center;justify-content:center;padding:16px;z-index:50}
+.modal[hidden]{display:none}
+.mb{background:#fff;border-radius:14px;padding:18px;max-width:460px;width:100%;max-height:90vh;overflow:auto}
+.mb h3{margin-top:0}.mr{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap;margin-top:12px}
+@media screen and (max-width:700px){
+.grid{grid-template-columns:1fr}
+table.rz,table.rz tbody,table.rz tr,table.rz td{display:block;width:100%}
+table.rz thead{display:none}
+table.rz tr{border:1px solid var(--ln);border-radius:10px;padding:6px;margin-bottom:10px}
+table.rz td{border:0;padding:4px 6px}
+table.rz td:before{content:attr(data-label);display:block;font-weight:700;font-size:.8rem;color:var(--pd)}
+table.rz td.nm:before{display:none}.lab{width:auto}.arow{flex-wrap:wrap}.arow .ans{min-width:60%}}
+@media print{
+@page{size:A4;margin:12mm}
+html,body{background:#fff;overflow:visible}
+.no-print{display:none!important}
+.hero{background:#fff;color:#000;border:2px solid #000}.hero:after{height:5px}
+.card{border:1px solid #888;break-inside:auto}
+.card h2{break-after:avoid;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+h3{break-after:avoid}.qa,tr{break-inside:avoid}thead{display:table-header-group}
+.ans{border:1px solid #888;background:#fff;box-shadow:none}.ans:empty:before{content:""}}
+</style></head><body>
+<div class="wrap" id="doc">
+<header class="hero"><h1>LEMBAR KERJA MURID (LKM)</h1><p><b>Proyek IPAS – Kelas X SMK</b></p><p>Topik: Zat dan Perubahannya | Model: Problem Based Learning</p></header>
+<div class="prog no-print">
+<svg id="pl" viewBox="0 0 100 100" aria-hidden="true"><ellipse cx="50" cy="93" rx="36" ry="8" fill="#8b5e34"/><circle id="sd" cx="50" cy="88" r="4" fill="#5b3a1a"/>
+<line id="st" x1="50" y1="90" x2="50" y2="84" stroke="#2f855a" stroke-width="4" stroke-linecap="round"/>
+<path id="l1" d="M0 0C-4-12-14-18-24-18C-22-8-12-2 0 0Z" fill="#48bb78"/><path id="r1" d="M0 0C-4-12-14-18-24-18C-22-8-12-2 0 0Z" fill="#48bb78"/>
+<path id="l2" d="M0 0C-4-12-14-18-24-18C-22-8-12-2 0 0Z" fill="#38a169"/><path id="r2" d="M0 0C-4-12-14-18-24-18C-22-8-12-2 0 0Z" fill="#38a169"/>
+<g id="fl"></g></svg>
+<div class="pi"><b id="pc">0%</b> <span id="pr" class="small"></span><div class="bar"><i id="pb"></i></div><div class="small"><span id="ps"></span> · <span id="sv">Belum ada perubahan</span></div></div></div>
+<div class="tools no-print"><button data-act="txt">⬇ Unduh .txt</button><button data-act="pdf">🖨 Cetak / Simpan PDF</button><button class="s" data-act="reset">↺ Reset</button></div>
+<main id="m"></main>
+<div class="tools no-print"><button data-act="txt">⬇ Unduh .txt</button><button data-act="pdf">🖨 Cetak / Simpan PDF</button><button class="s" data-act="reset">↺ Reset</button></div>
+</div>
+<div class="modal no-print" id="md" hidden><div class="mb"><h3 id="mh"></h3><div id="mt"></div><div class="mr" id="mr"></div></div></div>
+<script>
+(function(){'use strict';
+var $=function(s,r){return(r||document).querySelector(s)},$$=function(s,r){return[].slice.call((r||document).querySelectorAll(s))};
+var KEY='lkm5_b3_v1',T0=document.title,dirty=false,tm;
+var CC=[['nama','Nama Bahan B3'],['kl','Klasifikasi B3'],['ghs','Simbol GHS'],['dm','Dampak Kesehatan / Lingkungan'],['di','Ditemukan Di']];
+function fresh(){var s={f:{},src:[0,0,0],am:[{n:''},{n:''}],c1:[]};for(var i=0;i<5;i++)s.c1.push({});return s}
+var S=fresh();
+/* ---------- konten (sesuai LKPD) ---------- */
+function qa(k,n,t,c){return '<div class="qa" data-x="qa"><div class="qt">'+(n?'<b>'+n+'.</b> ':'')+t+'</div><div class="ans '+(c||'')+'" data-key="'+k+'" data-ph="'+(c?'Isi di sini':'Tulis jawaban kelompok di sini…')+'"></div></div>'}
+function sec(h,pet,b){return '<section class="card"><h2 data-x="head">'+h+'</h2>'+(pet?'<div class="pet"><b>Petugas :</b> '+pet+'</div>':'')+b+'</section>'}
+function sub(t){return '<h3 data-x="sub">'+t+'</h3>'}
+function tb(title,heads,rows,id){return '<div data-x="table" data-title="'+title+'"><table class="rz"><thead><tr>'+heads.map(function(h){return '<th'+(h[2]?' class="'+h[2]+'"':'')+(h[1]?' style="width:'+h[1]+'"':'')+'>'+h[0]+'</th>'}).join('')+'</tr></thead><tbody'+(id?' id="'+id+'"':'')+'>'+rows+'</tbody></table></div>'}
+function an(k){return '<div class="ans" data-key="'+k+'" data-ph="Isi di sini"></div>'}
+var H='';
+H+=sec('Identitas Kelompok','',
+ '<div class="grid">'+qa('ketua','','Nama Ketua:','one')+qa('kelas','','Kelas:','one')+qa('tanggal','','Tanggal:','one')+qa('kelompok','','Kelompok:','one')+'</div>'+
+ '<div data-x="members"><div class="lab" style="width:auto">Anggota Kelompok</div><div id="al"></div><button class="s no-print" data-act="addA">+ Tambah Anggota</button></div>');
+H+=sec('BAGIAN A – FASE 1: Orientasi pada Masalah','',
+ '<p><b>📖 Baca studi kasus berikut dengan seksama!</b></p><div class="case"><b>STUDI KASUS:</b><br><em>Daeng Ralla bekerja sebagai teknisi di salah satu bengkel pengecatan kendaraan di kawasan Jalan Sultan Alauddin, Makassar. Setiap hari ia berhadapan dengan cat semprot, thinner, dan oli bekas tanpa menggunakan alat pelindung diri (APD). Suatu hari, Daeng Ralla mengeluhkan sakit kepala berkepanjangan, mual, dan sesak napas. Dokter di Puskesmas Tamalate mendiagnosis Daeng Ralla mengalami keracunan senyawa organik volatil (VOC) yang terkandung dalam bahan-bahan tersebut. Sementara itu, di sudut bengkel, terlihat tumpukan kaleng cat bekas dan botol thinner yang dibuang sembarangan, mengancam lingkungan sekitar tempat tinggal warga di Kelurahan Rappocini.</em></div>'+
+ sub('A.1 Pertanyaan Orientasi')+
+ qa('a1','1','<em>Bahan-bahan apa saja yang digunakan Daeng Ralla dalam pekerjaannya sehari-hari? Apakah bahan-bahan tersebut termasuk kategori B3? Jelaskan alasanmu!</em>')+
+ qa('a2','2','<em>Mengapa Daeng Ralla bisa mengalami keracunan padahal ia hanya melakukan pekerjaan rutinnya? Apa yang seharusnya ia lakukan untuk mencegah hal tersebut?</em>')+
+ qa('a3','3','<em>Selain berdampak pada Daeng Ralla secara pribadi, apa dampak lain dari praktik pembuangan bahan kimia sembarangan yang digambarkan dalam kasus tersebut?</em>')+
+ qa('a4','4','Rumuskan pertanyaan utama yang perlu kalian selidiki berdasarkan kasus ini! (Pertanyaan terpandu):<br><em>“Bagaimana cara mengidentifikasi apakah suatu bahan termasuk B3?”</em><br><em>“Apa prosedur pengelolaan B3 yang seharusnya diterapkan di tempat kerja?”</em>'));
+H+=sec('BAGIAN B – FASE 2: Mengorganisasikan Rencana Penyelidikan','Ketua Kelompok memimpin pembagian tugas. Sekretaris mencatat rencana penyelidikan.',
+ sub('B.1 Pembagian Tugas Kelompok')+'<p>Berdasarkan pertanyaan yang telah dirumuskan di Fase 1, tuliskan rencana penyelidikan kelompok kalian!</p>'+
+ qa('b_fokus','','<b><i>Fokus Penyelidikan :</i></b>')+
+ '<p>Bagaimana pembagian tugas tiap anggota dalam penyelidikan ini? Isilah tabel berikut:</p>'+
+ tb('Pembagian tugas kelompok',[['Nama Anggota','30%'],['Peran','20%'],['Tugas Spesifik dalam Penyelidikan']],
+  [['Ketua Kelompok','Mengkoordinasi diskusi, memastikan semua anggota aktif, mengarahkan penyelidikan'],['Sekretaris','Mencatat temuan, mengisi tabel identifikasi B3, mendokumentasikan sumber referensi'],['Presenter','Menyusun ringkasan hasil diskusi, mempersiapkan bahan presentasi']].map(function(r,i){return '<tr><td data-label="Nama Anggota">'+an('b_n'+i)+'</td><td data-label="Peran">'+r[0]+'</td><td data-label="Tugas Spesifik dalam Penyelidikan" class="hint">'+r[1]+'</td></tr>'}).join(''))+
+ '<p>Sumber belajar apa saja yang akan kalian gunakan? Beri tanda (✓) pada pilihan berikut:</p><div class="chk" data-x="check" data-title="Sumber belajar yang digunakan">'+
+ ['Buku teks IPAS Kelas X','MSDS (Material Safety Data Sheet) online','Infografis B3 dari Kementerian LHK'].map(function(t,i){return '<label><input type="checkbox" data-i="'+i+'"><span>'+(i+1)+'. '+t+'</span></label>'}).join('')+'</div>');
+H+=sec('BAGIAN C – FASE 3: Membimbing Penyelidikan (Observasi Lapangan)','Ketua memimpin diskusi. Sekretaris mengisi tabel. Presenter menyusun ringkasan temuan.',
+ sub('C.1 Identifikasi Klasifikasi B3')+'<p><b>Berdasarkan sumber yang kalian gunakan, isilah tabel berikut dengan minimal 5 jenis B3!</b></p>'+
+ tb('Tabel identifikasi klasifikasi B3',[['No.','8%'],['Nama Bahan B3','17%'],['Klasifikasi B3','17%'],['Simbol GHS','14%'],['Dampak Kesehatan / Lingkungan','24%'],['Ditemukan Di','14%'],['Aksi','84px','no-print']],'','cb')+
+ '<button class="s no-print" data-act="addC">+ Tambah Baris / Subjek Identifikasi</button>'+
+ sub('C.2 Pertanyaan Pendalaman')+
+ qa('c1','1','<em>Apa perbedaan mendasar antara bahan yang ‘berbahaya’ dan yang ‘beracun (toksik)’? Berikan contoh masing-masing!</em>')+
+ qa('c2','2','<em>Mengapa label dan simbol GHS penting untuk dicantumkan pada kemasan B3? Apa yang terjadi jika label tersebut tidak ada?</em>')+
+ qa('c3','3','<em>Dari temuan kalian, B3 apa yang paling sering dijumpai di lingkungan sehari-hari di Makassar? Mengapa demikian?</em>'));
+H+=sec('BAGIAN D – FASE 4: Menyajikan Hasil Karya','Sekretaris mengisi tabel SOP. Presenter menyusun naskah presentasi. Ketua meninjau kelengkapan.',
+ sub('D.1 Susunlah SOP (Standar Operasional Prosedur) Sederhana Pengelolaan B3 untuk Pekerja Bengkel Pengecatan di Makassar!')+
+ tb('SOP pengelolaan B3',[['No.','8%'],['Aspek Pengelolaan','30%'],['Prosedur yang Harus Diterapkan']],
+  ['Penggunaan APD','Penyimpanan B3','Penggunaan B3 saat bekerja','Penanganan tumpahan/paparan B3','Pembuangan/pengelolaan limbah B3'].map(function(a,i){return '<tr><td class="nm" data-label="No.">'+(i+1)+'.</td><td data-label="Aspek Pengelolaan">'+a+'</td><td data-label="Prosedur yang Harus Diterapkan">'+an('d'+i)+'</td></tr>'}).join(''))+
+ sub('D.2 Berdasarkan SOP yang telah kalian susun, tuliskan rekomendasi untuk Daeng Ralla agar kejadian serupa tidak terulang!')+
+ qa('d_rek','','<b><i>Rekomendasi Kelompok :</i></b>'));
+H+=sec('BAGIAN E – FASE 5: Evaluasi Proses Pemecahan Masalah','Presenter menyampaikan hasil. Ketua menjawab pertanyaan. Sekretaris menyiapkan LKPD sebagai referensi.',
+ sub('E.1 Setelah mendengar presentasi semua kelompok, isilah tabel evaluasi berikut:')+
+ tb('Tabel evaluasi presentasi',[['Hal yang sama dengan kelompok lain','50%'],['Hal yang berbeda / unik dari kelompok kami']],'<tr><td data-label="Hal yang sama dengan kelompok lain">'+an('e_sama')+'</td><td data-label="Hal yang berbeda / unik dari kelompok kami">'+an('e_beda')+'</td></tr>')+
+ sub('E.2 Evaluasi Proses Belajar Kelompok')+
+ qa('e1','1','<em>Apa hal yang paling berhasil dari proses diskusi dan penyelidikan kelompok kalian hari ini?</em>')+
+ qa('e2','2','<em>Apa yang masih perlu diperbaiki dari cara kerja kelompok kalian? Apa yang akan kalian ubah jika harus mengerjakan proyek serupa lagi?</em>')+
+ qa('e3','3','<em>Dari seluruh pembelajaran hari ini, satu langkah nyata apa yang akan kalian ambil untuk lebih aman dalam berinteraksi dengan B3 di lingkungan sekitar Makassar?</em>'));
+$('#m').innerHTML=H;
+/* ---------- editable ---------- */
+var PLAIN=(function(){var d=document.createElement('div');try{d.contentEditable='plaintext-only'}catch(e){}return d.contentEditable==='plaintext-only'})();
+function ed(e){var one=e.classList.contains('one');e.setAttribute('contenteditable',PLAIN?'plaintext-only':'true');e.setAttribute('role','textbox');
+ e.addEventListener('paste',function(ev){ev.preventDefault();var t=(ev.clipboardData||window.clipboardData).getData('text');if(one)t=t.replace(/\s*[\r\n]+\s*/g,' ');document.execCommand('insertText',false,t)});
+ if(one)e.addEventListener('keydown',function(ev){if(ev.key==='Enter')ev.preventDefault()})}
+function val(e){return(e.innerText||e.textContent||'').replace(/\u00a0/g,' ').replace(/\n+$/,'')}
+function sync(e){var d=e.dataset,v=val(e);if(d.key)S.f[d.key]=v;else if(d.g==='am')S.am[d.i].n=v;else if(d.g==='c1')S.c1[d.i][d.c]=v}
+/* ---------- render dinamis ---------- */
+function rA(foc){var b=$('#al');b.innerHTML='';S.am.forEach(function(a,i){var r=document.createElement('div');r.className='arow';
+ r.innerHTML='<span class="lab">Anggota '+(i+2)+':</span><div class="ans one" data-ph="Nama anggota" data-g="am" data-i="'+i+'"></div><button type="button" class="d no-print" data-del="am" data-i="'+i+'">Hapus</button>';
+ var e=$('.ans',r);e.textContent=a.n||'';ed(e);b.appendChild(r);if(foc===i)e.focus()})}
+function rC(foc){var b=$('#cb');b.innerHTML='';S.c1.forEach(function(r,i){var tr=document.createElement('tr');
+ tr.innerHTML='<td class="nm" data-label="No.">'+(i+1)+'.</td>'+CC.map(function(c){return '<td data-label="'+c[1]+'"><div class="ans" data-g="c1" data-i="'+i+'" data-c="'+c[0]+'" data-ph="Isi di sini"></div></td>'}).join('')+'<td class="no-print"><button type="button" class="d" data-del="c1" data-i="'+i+'"'+(S.c1.length<2?' disabled':'')+'>Hapus</button></td>';
+ $$('.ans',tr).forEach(function(e){e.textContent=r[e.dataset.c]||'';ed(e)});b.appendChild(tr);if(foc===i)$('.ans',tr).focus()})}
+function fill(){$$('#m .ans[data-key]').forEach(function(e){ed(e);e.textContent=S.f[e.dataset.key]||''});
+ $$('.chk input').forEach(function(c){c.checked=!!S.src[c.dataset.i]});rA();rC();prog()}
+/* ---------- progres + tanaman ---------- */
+var fl=$('#fl'),pt='';for(var a=0;a<360;a+=45)pt+='<ellipse cx="0" cy="-9" rx="4.5" ry="8" fill="#f59e0b" transform="rotate('+a+')"/>';fl.innerHTML=pt+'<circle r="5" fill="#7c2d12"/>';
+function cl(x){return Math.max(0,Math.min(1,x))}
+function plant(p){var top=90-(6+54*p/100),st=$('#st');st.setAttribute('y2',top);st.style.display=p?'':'none';$('#sd').style.display=p?'none':'';
+ function lf(id,at,s,flip){var e=$('#'+id);e.setAttribute('transform','translate(50 '+(90-(90-top)*at)+') scale('+(flip?-s:s)+' '+s+')');e.style.display=s>0?'':'none'}
+ var a=p?.4+.6*cl(p/25):0,b=cl((p-30)/20);lf('l1',.3,a);lf('r1',.3,a,1);lf('l2',.62,b);lf('r2',.62,b,1);
+ var f=p>=67?.2+.8*(p-67)/33:0;fl.setAttribute('transform','translate(50 '+top+') scale('+f+')');fl.style.display=f?'':'none'}
+function prog(){var t=0,d=0;$$('#m .ans[data-key]').forEach(function(e){t++;if((S.f[e.dataset.key]||'').trim())d++});
+ t++;if(S.src.some(Boolean))d++;S.c1.forEach(function(r){CC.forEach(function(c){t++;if((r[c[0]]||'').trim())d++})});
+ var p=t?Math.round(d*100/t):0;$('#pc').textContent=p+'%';$('#pr').textContent=d+' dari '+t+' bagian terisi';$('#pb').style.width=p+'%';
+ $('#ps').textContent=p===0?'Biji siap ditanam':p<34?'Tunas tumbuh':p<67?'Tumbuh berdaun':p<100?'Kuncup bunga':'Bunga mekar! 🌼';plant(p)}
+/* ---------- simpan otomatis ---------- */
+function save(){if(!dirty)return;try{localStorage.setItem(KEY,JSON.stringify(S));$('#sv').textContent='Tersimpan otomatis '+new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'})}catch(e){$('#sv').textContent='Gagal menyimpan otomatis'}}
+function upd(){dirty=true;prog();clearTimeout(tm);tm=setTimeout(save,300)}
+try{var o=JSON.parse(localStorage.getItem(KEY)||'null');if(o&&o.f&&Array.isArray(o.am)&&Array.isArray(o.c1)&&o.c1.length&&Array.isArray(o.src))S=o}catch(e){}
+fill();
+window.addEventListener('pagehide',save);document.addEventListener('visibilitychange',function(){if(document.hidden)save()});
+/* ---------- modal ---------- */
+function modal(h,html,btns){$('#mh').textContent=h;$('#mt').innerHTML=html;var r=$('#mr');r.innerHTML='';
+ btns.forEach(function(b){var x=document.createElement('button');x.type='button';x.textContent=b[0];x.className=b[2]||'s';x.onclick=function(){$('#md').hidden=true;if(b[1])b[1]()};r.appendChild(x)});$('#md').hidden=false}
+function ask(h,t,fn,lb){modal(h,'<p>'+t+'</p>',[['Batal'],[lb||'Ya',fn,'r']])}
+/* ---------- nama file, txt, cetak ---------- */
+function cn(s,d){s=String(s||'').replace(/[\\\/:*?"<>|\u0000-\u001f]/g,'-').replace(/\s+/g,' ').trim().replace(/[. ]+$/,'').slice(0,40);return s||d}
+function fb(){return 'LKM 5_'+cn(S.f.kelompok,'Kelompok')+'_'+cn(S.f.kelas,'Kelas')}
+function txt(){var L=['LEMBAR KERJA MURID (LKM)','Proyek IPAS – Kelas X SMK','Topik: Zat dan Perubahannya | Model: Problem Based Learning',''],
+ ind=function(v){return v.trim()?v.replace(/\n/g,'\n        '):'(belum diisi)'};
+ $$('#m [data-x]').forEach(function(n){var t=n.dataset.x;
+  if(t==='head')L.push('','=== '+n.textContent+' ===','');
+  else if(t==='sub')L.push('',n.textContent);
+  else if(t==='qa')L.push($('.qt',n).textContent.trim(),'   Jawaban: '+ind(val($('.ans',n))),'');
+  else if(t==='members')S.am.forEach(function(a,i){L.push('Anggota '+(i+2)+': '+(a.n||'-'))});
+  else if(t==='check'){L.push(n.dataset.title+':');$$('label',n).forEach(function(l,i){L.push('  ['+(S.src[i]?'x':' ')+'] '+l.textContent.trim())});L.push('')}
+  else if(t==='table'){L.push(n.dataset.title+':');$$('tbody tr',n).forEach(function(tr,i){L.push('  Baris '+(i+1)+':');$$('td',tr).forEach(function(td){var lb=td.dataset.label;if(!lb||lb==='No.')return;var e=$('.ans',td);L.push('    - '+lb+': '+(e?ind(val(e)):td.textContent.trim()))})});L.push('')}});
+ return L.join('\r\n')}
+function dl(){var b=new Blob(['\ufeff'+txt()],{type:'text/plain;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=fb()+'.txt';document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},1500)}
+var IOS=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+function pr(){document.title=fb();requestAnimationFrame(function(){requestAnimationFrame(function(){setTimeout(function(){try{window.print()}catch(e){guide()}},80)})})}
+function guide(){modal('Panduan Cetak di iPhone / iPad','<ol><li>Ketuk tombol <b>Bagikan</b> (kotak dengan panah ke atas) di Safari, lalu pilih <b>Cetak</b>.</li><li>Di pratinjau cetak, renggangkan dua jari (pinch-out) pada halaman agar berubah menjadi PDF.</li><li>Ketuk <b>Bagikan</b> lagi → <b>Simpan ke Berkas</b>.</li></ol><p class="small">Jika dialog tidak muncul, gunakan Safari (bukan tampilan dalam aplikasi lain) atau unduh jawaban lewat tombol .txt.</p>',[['Tutup'],['Coba Cetak Sekarang',pr,'p']])}
+window.addEventListener('beforeprint',function(){document.title=fb()});window.addEventListener('afterprint',function(){document.title=T0});
+/* ---------- event ---------- */
+document.addEventListener('input',function(e){var el=e.target;if(!el.classList||!el.classList.contains('ans'))return;if(el.textContent===''&&el.innerHTML!=='')el.innerHTML='';sync(el);upd()});
+document.addEventListener('change',function(e){var c=e.target;if(c.matches&&c.matches('.chk input')){S.src[c.dataset.i]=c.checked?1:0;upd()}});
+document.addEventListener('click',function(e){var b=e.target.closest('[data-del]');
+ if(b){var g=b.dataset.del,i=+b.dataset.i,has=g==='am'?(S.am[i].n||''):CC.map(function(c){return S.c1[i][c[0]]||''}).join('');
+  var go=function(){S[g].splice(i,1);g==='am'?rA():rC();upd()};has.trim()?ask('Hapus baris ini?','Isian pada baris ini akan hilang.',go,'Hapus'):go();return}
+ b=e.target.closest('[data-act]');if(!b)return;var a=b.dataset.act;
+ if(a==='addA'){S.am.push({n:''});rA(S.am.length-1);upd()}
+ else if(a==='addC'){S.c1.push({});rC(S.c1.length-1);upd()}
+ else if(a==='txt')dl();
+ else if(a==='pdf')IOS?guide():pr();
+ else if(a==='reset')ask('Reset seluruh isian?','Semua jawaban, anggota, dan baris tabel akan dikosongkan, dan data tersimpan di browser dihapus. Tindakan ini tidak dapat dibatalkan.',function(){try{localStorage.removeItem(KEY)}catch(x){}S=fresh();dirty=false;fill();$('#sv').textContent='Formulir dikosongkan'},'Ya, Reset')});
+})();
+</script></body></html>
